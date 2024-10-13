@@ -32,7 +32,7 @@ header {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    padding: 120px 20px; /* Penambahan padding untuk ruang */
+    padding: 60px 20px; /* Penambahan padding untuk ruang */
     text-align: center;
     color: white;
     transition: background-color 0.5s ease, color 0.5s ease;
@@ -57,15 +57,14 @@ header::after {
 nav {
     background-color: white;
     border-radius: 15px;
-    padding: 15px 0;
+    padding: 10px 20px; /* Padding untuk desktop */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Memisahkan navbar items dan theme selector */
     align-items: center;
-    margin: 10px 20px;
     transition: background-color 0.5s ease, color 0.5s ease;
 }
 
@@ -73,13 +72,13 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: flex; /* Menjaga layout flex di desktop */
+    justify-content: space-around; /* Mengatur spasi antar item */
+    align-items: center;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 15px; /* Margin untuk item navbar */
 }
 
 nav ul li a {
@@ -94,6 +93,18 @@ nav ul li a {
 nav ul li a:hover {
     background-color: #007BFF;
     color: white;
+}
+
+/* Mobile toggle button */
+.mobile-toggle {
+    display: none;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 /* Dark mode toggle button styles */
@@ -215,8 +226,35 @@ img {
 
 /* Responsive styles */
 @media (max-width: 768px) {
+    .title {
+        font-size: 4rem; /* Mengurangi ukuran font di perangkat kecil */
+    }
+    
+    nav {
+        flex-direction: column; /* Menjadi kolom untuk tampilan kecil */
+        align-items: flex-start; /* Rata kiri */
+        padding: 10px 15px; /* Padding navbar untuk tampilan kecil */
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column; /* Menjaga item dalam kolom */
+        width: 100%;
+        padding: 0; /* Tambahan padding untuk ruang */
+        margin: 0;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
     nav ul li {
-        margin: 10px 0;
+        margin: 5px 0; /* Mengurangi margin untuk item dalam kolom */
+        width: 100%;
+    }
+
+    .mobile-toggle {
+        display: block;
     }
 
     h2 {
