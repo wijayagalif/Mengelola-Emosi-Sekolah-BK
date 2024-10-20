@@ -1,6 +1,10 @@
 /* Global styles */
+* {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     color: #333;
@@ -10,8 +14,6 @@ body {
 
 .title {
     font-size: 6rem; /* Sesuaikan ukuran font sesuai keinginan */
-    margin: 0;
-    padding: 0;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7); /* Efek bayangan agar teks lebih terlihat */
 }
 
@@ -31,7 +33,6 @@ header {
     background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQao85Dye7-mSW4RUtfwFhgOfjyYUyBhb9-3g&s');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     padding: 60px 20px; /* Penambahan padding untuk ruang */
     text-align: center;
     color: white;
@@ -51,6 +52,8 @@ header::after {
     background-color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    animation: fadeInUp 0.8s ease;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 /* Navbar styles (rounded and minimal) */
@@ -70,15 +73,14 @@ nav {
 
 nav ul {
     list-style: none;
+    display: flex; /* Menjaga layout flex di desktop */
     margin: 0;
     padding: 0;
-    display: flex; /* Menjaga layout flex di desktop */
-    justify-content: space-around; /* Mengatur spasi antar item */
-    align-items: center;
+    gap: 15px;
 }
 
 nav ul li {
-    margin: 0 15px; /* Margin untuk item navbar */
+    margin: 0; /* Margin untuk item navbar */
 }
 
 nav ul li a {
@@ -95,16 +97,21 @@ nav ul li a:hover {
     color: white;
 }
 
-/* Mobile toggle button */
-.mobile-toggle {
-    display: none;
-}
-
 .toggle-button {
     background: none;
     border: none;
     font-size: 24px;
     cursor: pointer;
+}
+
+/* Animasi untuk burger menu hider */
+.navbar-hider {
+    display: none; /* Awalnya disembunyikan */
+}
+
+.navbar-hider.active {
+    display: block;
+    animation: slideDown 0.5s ease-in-out;
 }
 
 /* Dark mode toggle button styles */
@@ -121,8 +128,8 @@ nav ul li a:hover {
     justify-content: flex-start;
     transition: background-color 0.3s ease;
     padding: 3px;
-    margin-left: 20px; /* Ruang antara toggle dan navbar */
-    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Ruang antara toggle dan navbar */
+    margin-top: 10px;
 }
 
 #themeToggle.active {
@@ -133,18 +140,6 @@ nav ul li a:hover {
 #themeToggle .icon {
     font-size: 1rem;
     transition: color 0.3s ease;
-}
-
-/* Content styles */
-.content {
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    animation: fadeInUp 0.8s ease;
-    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 section {
@@ -160,8 +155,7 @@ h2 {
     transition: color 0.5s ease;
 }
 
-p,
-ul {
+p, ul {
     font-size: 1.1rem;
     margin-bottom: 15px;
 }
@@ -187,18 +181,6 @@ body.dark-mode .quote {
     color: #ddd; /* Warna teks */
     background-color: #333; /* Latar belakang quote */
     padding: 10px; /* Tambahan padding agar lebih baik terlihat */
-}
-
-/* Animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* Footer styles */
@@ -233,19 +215,39 @@ img {
     nav {
         flex-direction: column; /* Menjadi kolom untuk tampilan kecil */
         align-items: flex-start; /* Rata kiri */
-        padding: 10px 15px; /* Padding navbar untuk tampilan kecil */
+    }
+    
+    /* Mobile toggle button */
+    .mobile-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
     }
 
     nav ul {
         display: none;
         flex-direction: column; /* Menjaga item dalam kolom */
         width: 100%;
-        padding: 0; /* Tambahan padding untuk ruang */
-        margin: 0;
     }
-
+    
     nav ul.active {
         display: flex;
+        animation: slideDown 0.5s ease-in-out;
+    }
+
+    /* Navbar burger button */
+    .toggle-button {
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: #333;
+        cursor: pointer;
+        margin-right: 20px; /* Spasi untuk toggle button */
+    }
+    
+    .toggle-button:hover {
+        color: #4CAF50; /* Warna hover di mode mobile */
     }
 
     nav ul li {
@@ -253,8 +255,9 @@ img {
         width: 100%;
     }
 
-    .mobile-toggle {
-        display: block;
+    /* Mengubah warna burger button di dark mode */
+    body.dark-mode .toggle-button {
+        color: white;
     }
 
     h2 {
@@ -276,6 +279,16 @@ body.dark-mode {
     color: white;
 }
 
+body.dark-mode .emotion-list li {
+    background-color: #444;
+    color: white;
+}
+
+body.dark-mode .emotion-list li:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
 body.dark-mode .content {
     background-color: #2c2c2c;
     color: white;
@@ -285,20 +298,62 @@ body.dark-mode nav {
     background-color: #333;
 }
 
-body.dark-mode nav ul li a {
-    color: white; /* Warna teks di dark mode */
+body.dark-mode a, body.dark-mode nav ul li a {
+    color: white;
     background-color: #444; /* Warna latar belakang tautan nav */
 }
 
 body.dark-mode nav ul li a:hover {
     background-color: #007BFF; /* Warna hover di dark mode */
-    color: white; /* Warna teks hover di dark mode */
+    background-color: #444; /* Warna latar belakang tautan nav */
 }
 
 body.dark-mode footer {
     background-color: #222;
 }
 
-body.dark-mode a {
-    color: white; /* Warna tautan di dark mode */
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styling definisi emosi dan elemen navbar lainnya agar terlihat lebih modern */
+.emotion-list {
+    list-style: none; /* Menghapus bullet */
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.emotion-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f3f6f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.emotion-list li:hover {
+    background-color: #4CAF50;
+    color: white;
 }
